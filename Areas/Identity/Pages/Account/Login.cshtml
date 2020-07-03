@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Acessar";
+    ViewData["Title"] = "Logar";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <section>
             <form id="account" method="post">
-                <h4>User um Email já registrado.</h4>
+                <h4>Use um e-mail já registrado.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Acessar</button>
+                    <button type="submit" class="btn btn-primary">Logar</button>
                 </div>
                 <div class="form-group">
                     <p>
