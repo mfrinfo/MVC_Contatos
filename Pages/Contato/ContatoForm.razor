@@ -1,0 +1,77 @@
+@inject NavigationManager navigation
+
+<EditForm Model="@Contato" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator/>
+
+    <div class="form-group">
+        <label form="nome">Nome</label>
+        <div>
+            <InputText @bind-Value="@Contato.Nome" class="form-control" name="nomeTxt" id="nomeId" />
+            <ValidationMessage For="@(() =>Contato.Nome)"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label form="endereco">Endereço</label>
+        <div>
+            <InputText @bind-Value="@Contato.Endereco" class="form-control" name="enderecoTxt" id="enderecoId" />
+        </div>
+    </div>   
+
+    <div class="form-group">
+        <label form="cidade">Cidade</label>
+        <div>
+            <InputText @bind-Value="@Contato.Cidade" class="form-control" name="cidadeTxt" id="cidadeId"/>
+        </div>
+    </div>   
+
+    <div class="form-group">
+        <label form="estado">Estado</label>
+        <div>
+            <InputText @bind-Value="@Contato.Estado" class="form-control" name="estadoTxt" id="estadoId"/>
+        </div>
+    </div>   
+
+    <div class="form-group">
+        <label form="cep">CEP</label>
+        <div>
+            <InputText @bind-Value="@Contato.Cep" class="form-control" name="cepTxt" id="cepId"/>
+        </div>
+    </div>      
+
+    <div class="form-group">
+        <label form="fone">Telefone</label>
+        <div>
+            <InputText @bind-Value="@Contato.Fone" class="form-control" name="telefoneTxt" id="telefoneId" />
+        </div>
+    </div>          
+
+    <div class="form-group">
+        <label form="email">Email</label>
+        <div>
+            <InputText @bind-Value="@Contato.Email" class="form-control" name="emailTxt" id="emailId"/>
+            <ValidationMessage For="@(() =>Contato.Email)"/>
+        </div>
+    </div>       
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" name="btnGravar">@ButtonTextSubmit</button>
+        <button name="btnDeletar" class="btn btn-danger" @onclick="@(() => navigation.NavigateTo("contato"))">@ButtonTextCancelar</button> 
+    </div>
+</EditForm>
+
+@code {
+    //[Inject]
+    //public NavigationManager navigation { get; set; }
+
+    [Parameter]
+    public Contato Contato { get; set; }
+
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+    [Parameter]
+    public string ButtonTextSubmit { get; set; } = "Salvar";
+
+    [Parameter]
+    public string ButtonTextCancelar { get; set; } = "Cencelar";
+}
