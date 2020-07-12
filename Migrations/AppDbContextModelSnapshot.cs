@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Contatos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ContatoContextoModelSnapshot : ModelSnapshot
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,9 @@ namespace MVC_Contatos.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("EstadoCivil")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Fone")
                         .HasColumnType("TEXT");
 
@@ -47,7 +50,7 @@ namespace MVC_Contatos.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("contatos");
+                    b.ToTable("Contatos");
                 });
 #pragma warning restore 612, 618
         }

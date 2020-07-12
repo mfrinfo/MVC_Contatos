@@ -11,6 +11,15 @@
         </div>
     </div>
     <div class="form-group">
+      @foreach (var item in new string[] { "Solteiro","Casado","Viúvo", "Outros"})
+      {
+          <label>
+            <input type="radio" name="estadoCivil" id="@item" value="@item" @onchange="RadioSelection" checked=@(RadioValue.Equals(item,StringComparison.OrdinalIgnoreCase)) />
+            @item
+          </label>
+      }
+    </div>
+    <div class="form-group">
         <label form="endereco">Endereço</label>
         <div>
             <InputText @bind-Value="@Contato.Endereco" class="form-control" name="enderecoTxt" id="enderecoId" />
@@ -25,11 +34,21 @@
     </div>   
 
     <div class="form-group">
-        <label form="estado">Estado</label>
+        <label form="estado">UF</label>
         <div>
-            <InputText @bind-Value="@Contato.Estado" class="form-control" name="estadoTxt" id="estadoId"/>
+            <select @onchange="UfSelectionChanged" class="form-control" name="estadoSlc" id="estadoId">
+                @if(estados != null)
+                { 
+                    foreach (var item in estados)
+                    {
+                        <option value="@item.codigo" selected="@(item.codigo == Contato.Estado ? true: false)">
+                            @item.nome
+                        </option>
+                    }
+                }
+            </select>       
         </div>
-    </div>   
+    </div>
 
     <div class="form-group">
         <label form="cep">CEP</label>
@@ -74,4 +93,56 @@
 
     [Parameter]
     public string ButtonTextCancelar { get; set; } = "Cencelar";
+
+    string RadioValue = "Solteiro";
+    private List<Uf> estados = new List<Uf>()
+    {
+    new Uf { codigo = "AC", nome = "Acre"},
+    new Uf { codigo = "AL", nome = "Alagoas"},
+    new Uf { codigo = "AP", nome = "Amapá"},
+    new Uf { codigo = "AM", nome = "Amazonas"},
+    new Uf { codigo = "BA", nome = "Bahia"},
+    new Uf { codigo = "CE", nome = "Ceará"},
+    new Uf { codigo = "DF", nome = "Distrito Federal"},
+    new Uf { codigo = "ES", nome = "Espírito Santo"},
+    new Uf { codigo = "GO", nome = "Goiás"},
+    new Uf { codigo = "MA", nome = "Maranhão"},
+    new Uf { codigo = "MT", nome = "Mato Grosso"},
+    new Uf { codigo = "MS", nome = "Mato Grosso do Sul"},
+    new Uf { codigo = "MG", nome = "Minas Gerais"},
+    new Uf { codigo = "PA", nome = "Pará"},
+    new Uf { codigo = "PB", nome = "Paraíba"},
+    new Uf { codigo = "PR", nome = "Paraná"},
+    new Uf { codigo = "PE", nome = "Pernambuco"},
+    new Uf { codigo = "PI", nome = "Piauí"},
+    new Uf { codigo = "RJ", nome = "Rio de Janeiro"},
+    new Uf { codigo = "RN", nome = "Rio Grande do Norte"},
+    new Uf { codigo = "RS", nome = "Rio Grande do Sul"},
+    new Uf { codigo = "RO", nome = "Rondônia"},
+    new Uf { codigo = "RR", nome = "Roraima"},
+    new Uf { codigo = "SC", nome = "Santa Catarina"},
+    new Uf { codigo = "SP", nome = "São Paulo"},
+    new Uf { codigo = "SE", nome = "Sergipe"},
+    new Uf { codigo = "TO", nome = "Tocantins"},
+    };
+
+    void UfSelectionChanged(ChangeEventArgs e)
+    {
+        Contato.Estado = e.Value.ToString();
+    }
+
+
+    void RadioSelection(ChangeEventArgs e)
+    {
+        Contato.EstadoCivil = e.Value.ToString();
+        RadioValue = e.Value.ToString();
+    }
+    protected override void OnInitialized()
+    {
+        if (String.IsNullOrEmpty(Contato.EstadoCivil))
+            RadioValue = "Solteiro";
+        else
+            RadioValue = Contato.EstadoCivil;
+    }
+
 }

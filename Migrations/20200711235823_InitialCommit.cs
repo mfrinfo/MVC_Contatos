@@ -2,12 +2,12 @@
 
 namespace MVC_Contatos.Migrations
 {
-    public partial class AdicionadoContatos : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "contatos",
+                name: "Contatos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -18,18 +18,19 @@ namespace MVC_Contatos.Migrations
                     Estado = table.Column<string>(nullable: true),
                     Cep = table.Column<string>(nullable: true),
                     Fone = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: false)
+                    Email = table.Column<string>(nullable: false),
+                    EstadoCivil = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_contatos", x => x.Id);
+                    table.PrimaryKey("PK_Contatos", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "contatos");
+                name: "Contatos");
         }
     }
 }

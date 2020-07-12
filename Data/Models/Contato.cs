@@ -18,5 +18,6 @@ namespace MVC_Contatos.Data.Models
         [Required(ErrorMessage = "Informe o Email")]
         [EmailAddress(ErrorMessage = "Formato do Email Inválido")]
         public string Email { get; set; }
+        public string EstadoCivil { get; set; }
     }
 }
