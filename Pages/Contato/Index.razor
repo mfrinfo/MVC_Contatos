@@ -108,9 +108,12 @@ else
     }
     async Task DeletaConfirma()
     {
-        await contatoService.DeleteContato(codigoContato);
         confirma.Ocultar();
-        await CarregaContatos();
+        if (codigoContato > 0)
+        {
+            await contatoService.DeleteContato(codigoContato);
+            await CarregaContatos();
+        }
     }
     private async Task LimparFiltro()
     {

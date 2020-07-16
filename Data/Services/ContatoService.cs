@@ -26,7 +26,7 @@ namespace MVC_Contatos.Data.Services
 
         public async Task<bool> DeleteContato(int id)
         {
-            var contato = new Contato { Id = id };
+            var contato = await _context.Contatos.FirstOrDefaultAsync(x => x.Id == id);
             _context.Remove(contato);
             var result = await _context.SaveChangesAsync();
 
